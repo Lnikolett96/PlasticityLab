@@ -1,0 +1,53 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build / output
+dist/
+build/
+out/
+lib/
+esm/
+cjs/
+*.tsbuildinfo
+
+# TypeScript
+*.tsbuildinfo
+
+# React / CRA / Next / caches
+.cache/
+.next/
+.parcel-cache/
+
+# Coverage / testing
+coverage/
+.nyc_output/
+jest-cache/
+jest.config.js?*  # optional if generated
+
+# Logs
+logs/
+*.log
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Environment variables / secrets
+.env
+.env.*.local
+
+# VSCode
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Misc
+*.tgz
+*.zip
+*.gz
