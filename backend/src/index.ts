@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 
 dotenv.config();
 import express from 'express'
-import user from './routes/user.js'
+import user from './routes/user.routes.js'
 import { pool } from './database/db.js'
 
 const app = express()

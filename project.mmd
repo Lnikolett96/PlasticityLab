@@ -1,0 +1,83 @@
+classDiagram
+  %% Controllers
+  class AuthController {
+    +register(req, res): Promise
+    +login(req, res): Promise
+    +getProfile(req, res): Promise
+  }
+  class GameController {
+    +listGames(req, res): Promise
+    +getGame(id): Promise
+    +getUserResults(userId): Promise
+  }
+
+  %% Services
+  class UserService {
+    +createUser(dto: UserCreateDTO): Promise<User>
+    +authenticate(dto: LoginDTO): Promise<Token>
+    +getById(id: UUID): Promise<User>
+  }
+  class GameService {
+    +listGames(): Promise~Game[]~
+    +getResults(userId: UUID): Promise~GameResult[]~
+    +saveResult(dto: GameResultDTO): Promise~void~
+  }
+
+  %% Repositories
+  class UserRepository {
+    +findByUsername(username: String): Promise~User|null~
+    +save(user: User): Promise~User~
+  }
+  class GameRepository {
+    +findAll(): Promise~Game[]~
+    +findById(id: UUID): Promise~Game|null~
+  }
+  class ScoreRepository {
+    +save(score: GameScore): Promise~GameScore~
+    +findByUser(userId: UUID): Promise~GameScore[]~
+  }
+
+  %% Models / DTOs
+  class User {
+    +id: UUID
+    +username: String
+    +email: String
+    +passwordHash: String
+    +createdAt: Timestamp
+  }
+  class Game {
+    +id: UUID
+    +name: String
+    +description: String
+  }
+  class GameScore {
+    +id: UUID
+    +userId: UUID
+    +gameId: UUID
+    +score: Int
+    +duration: Int
+    +level: Int
+    +createdAt: Timestamp
+  }
+  class UserCreateDTO {
+    +username: String
+    +email: String
+    +password: String
+  }
+  class LoginDTO {
+    +username: String
+    +password: String
+  }
+  class GameResultDTO {
+    +gameId: UUID
+    +score: Int
+    +duration: Int
+    +level: Int
+  }
+
+  %% Kapcsolatok
+  AuthController --> UserService
+  GameController --> GameService
+  UserService --> UserRepository
+  GameService --> GameRepository
+  GameService --> ScoreRepository
